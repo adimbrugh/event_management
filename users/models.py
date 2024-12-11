@@ -21,12 +21,12 @@ class UserManager(BaseUserManager):
         user.is_superuser = True
         user.save(using = self._db)
         return user
-
+    
 
 
 class User(AbstractUser):
-    email = models.EmailField(unique=True, max_length=10)
-    username = models.CharField(unique=False, max_length=10)
+    email = models.EmailField(unique=True, max_length=20)
+    username = models.CharField(unique=False, max_length=20)
     phone = models.CharField(max_length=15, blank=True, null=True)
     profile = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
 

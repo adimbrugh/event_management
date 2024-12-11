@@ -12,6 +12,7 @@ from rest_framework.routers import Response
 from django.utils.timezone import now
 from rest_framework import filters
 from events.models import Event
+from .permissions import IsOwner
 
 
 User = get_user_model()
@@ -27,7 +28,7 @@ class UserViewSet(ReadOnlyModelViewSet):
 class EventViewSet(ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwner]
     filter_backends = [filters.OrderingFilter, filters.SearchFilter]
     searsh_fields = ['title', 'description', 'location']
     ordering_fields = ['date', 'created_at']
